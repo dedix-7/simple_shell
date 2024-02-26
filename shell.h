@@ -1,5 +1,5 @@
 #ifndef SHELL_H
-#define SHELL_H
+11;rgb:0000/0000/0000#define SHELL_H
 
 #include<unistd.h>
 #include<stdio.h>
@@ -18,5 +18,7 @@ int _print(char *str);
 int _strlen(char *str);
 char *_strcpy(char*src, char *dest);
 char *_strdup(char *str);
+void interactive_mode(int arc, char **argv, char **envp);
+void non_interactive_mode(int ac, char **av, char **env);
 
 #endif /* SHELL_H */
