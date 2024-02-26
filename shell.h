@@ -18,5 +18,7 @@ int _print(char *str);
 int _strlen(char *str);
 char *_strcpy(char*src, char *dest);
 char *_strdup(char *str);
+void interactive_mode(int argc, char **argv, char **envp);
+void non_interactive_mode(int argc, char **argv, char **envp);
 
 #endif /* SHELL_H */
