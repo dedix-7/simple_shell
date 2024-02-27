@@ -48,21 +48,21 @@ char **copyenviron(char **envp)
 int free_copyenviron(char **copy)
 {
 	int i = 0, size = 0;
+	char *str;
 
 	if (copy == NULL)
-	{
-		printf("Null pointer passed");
 		return (0);
-	}
 	if (*copy == NULL)
-	{
-		printf("dereference null");
 		return (0);
-	}
 	while (copy[size])
 		size++;
-	for (i = 0; i < (size - 1) ; i++)
+	printf("Size is %d blocks", size);
+	for (i = 0; i < (size - 3) ; i++)
+	{
+		printf("attempting to free %d block", i);
 		free(copy[i]);
+		printf("Successfully freed %d block", i);
+	}
 	free(copy);
 	return (1);
 }
