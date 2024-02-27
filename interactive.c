@@ -9,6 +9,13 @@
 void interactive_mode(int argc, char **argv, char **envp)
 {
 	char *command;
-	size_t n;
+	size_t bufsize;
+	ssize_t check_getline;
 
-	
+	while (1)
+	{
+		_print("$cisfun :");
+		check_getline = getline(&command, &bufsize, stdin);
+		command = 
+	}
+}

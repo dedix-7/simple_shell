@@ -60,3 +60,18 @@ char *_strdup(char *str)
 	*ptr = 0;
 	return (ret);
 }
+/**
+ * _strcmp - clone strcmp
+ * @first: first string to compare
+ * @sec: second string
+ * Return: difference in ascii values
+ */
+int _strcmp(char *first, char *sec)
+{
+	int i = 0, ret = 0;
+
+	while ((*(first + i) == *(sec + i)) && first[i] && sec[i])
+		i++;
+	ret = ret + (first[i] - sec[i]);
+	return (ret);
+}
