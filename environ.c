@@ -40,15 +40,20 @@ char **copyenviron(char **envp)
 	return (copy);
 }
 /**
- * free_copyenviron - frees a ciopy of the environ variable
+ * free_copyenviron - frees a copy of the environ variable
  * @copy: copy of the environment variable
- * Is a doiuble pointer
+ * Is a double pointer
  * Return: 1 on success, zero otherwise
  */
 int free_copyenviron(char **copy)
 {
 	int i = 0, size = 0;
 
+	if (copy == NULL )
+	{
+		printf("Null pointer passed");
+		return (0);
+	}
 	while (copy[size])
 		size++;
 	for (i = 0; i < size ; i++)
@@ -58,7 +63,7 @@ int free_copyenviron(char **copy)
 }
 /**
  * main - test copy environ
- * variosu args
+ * various args
  * Return: 0 on success
  */
 int main(int argc, char **argv, char **envp)
@@ -68,6 +73,6 @@ int main(int argc, char **argv, char **envp)
 
 	copy = copyenviron(envp);
 	for (i = 0; envp[i]; i++)
-		printf("%s            %s", envp[i], copy[i]);
+		printf("%s		       n%s", envp[i], copy[i]);
 	return (free_copyenviron(copy));
 }
