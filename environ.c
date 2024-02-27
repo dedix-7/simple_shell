@@ -78,6 +78,6 @@ int main(int argc, char **argv, char **envp)
 
 	copy = copyenviron(envp);
 	for (i = 0; envp[i]; i++)
-		printf("%s\n%s", envp[i], copy[i]);
+		printf("%s\n%s\n", envp[i], copy[i]);
 	return (free_copyenviron(copy));
 }
