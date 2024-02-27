@@ -28,9 +28,10 @@ char *_getenv(char *name, char **envp)
 char **copyenviron(char **envp)
 {
 	char **copy;
-	int i = 0, size;
+	int i = 0, size = 0;
 
-	size = sizeof(envp)/sizeof(envp[0]);
+	while (envp[size])
+		size++;
 	copy = malloc(size * sizeof(char *));
 	if (copy == NULL)
 		return (NULL);
@@ -46,9 +47,11 @@ char **copyenviron(char **envp)
  */
 int free_copyenviron(char **copy)
 {
-	int i = 0;
+	int i = 0, size = 0;
 
-	for (i = 0; copy[i]; i++)
+	while (copy[size])
+		size++;
+	for (i = 0; i < size ; i++)
 		free(copy[i]);
 	free(copy);
 	return (1);
