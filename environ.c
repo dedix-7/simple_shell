@@ -91,6 +91,6 @@ int main(int argc, char *argv[], char **envp)
 
 	en = _getenv("SHELL", envp);
 	tes = getenv("SHELL");
-	printf("\nThe functions yields value of PATH as \n%s\n and stdlib gives\n%s\n", en, tes);
+/*	printf("\nThe functions yields value of PATH as \n%s\n and stdlib gives\n%s\n", en, tes);*/
 	return (0);
 }
