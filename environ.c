@@ -61,7 +61,7 @@ int free_copyenviron(char **copy)
 	}
 	while (copy[size])
 		size++;
-	for (i = 0; i < size ; i++)
+	for (i = 0; i < (size - 1) ; i++)
 		free(copy[i]);
 	free(copy);
 	return (1);
