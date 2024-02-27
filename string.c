@@ -4,9 +4,9 @@
  * @str: string to find length
  * Return: length of string
  */
-size_t _strlen(char *str)
+int _strlen(char *str)
 {
-	size_t len = 0;
+	int len = 0;
 
 	while (str[len])
 		len++;

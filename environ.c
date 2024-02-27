@@ -30,13 +30,23 @@ char **copyenviron(char **envp)
 	char **copy;
 	int i = 0, size = 0;
 
-	while (envp[size])
+	while (envp[size] != NULL)
 		size++;
-	copy = malloc(size * sizeof(char *));
+	copy = malloc((size + 1) * sizeof(char *));
 	if (copy == NULL)
 		return (NULL);
 	for (i = 0; i < size; i++)
+	{
+		if (!envp[i])
+			break;
 		copy[i] = strdup(envp[i]);
+		if (strcmp(envp[i], copy[i]) != 0)
+		{
+			printf("the variable %d did not copy well");
+			exit(EXIT_SUCCESS);
+		}
+	}
+	copy[size] = '\0';
 	return (copy);
 }
 /**
@@ -57,27 +67,8 @@ int free_copyenviron(char **copy)
 	while (copy[size])
 		size++;
 	printf("Size is %d blocks", size);
-	for (i = 0; i < (size - 3) ; i++)
-	{
-		printf("attempting to free %d block", i);
+	for (i = 0; i < size ; i++)
 		free(copy[i]);
-		printf("Successfully freed %d block", i);
-	}
 	free(copy);
 	return (1);
-}
-/**
- * main - test copy environ
- * various args
- * Return: 0 on success
- */
-int main(int argc, char **argv, char **envp)
-{
-	char **copy;
-	int i;
-
-	copy = copyenviron(envp);
-	for (i = 0; envp[i]; i++)
-		printf("%s\n%s\n", envp[i], copy[i]);
-	return (free_copyenviron(copy));
 }
