@@ -35,7 +35,7 @@ char **copyenviron(char **envp)
 	copy = malloc(size * sizeof(char *));
 	if (copy == NULL)
 		return (NULL);
-	for (i = 0; envp[i]; i++)
+	for (i = 0; i < size; i++)
 		copy[i] = strdup(envp[i]);
 	return (copy);
 }
@@ -53,12 +53,12 @@ int free_copyenviron(char **copy)
 	{
 		printf("Null pointer passed");
 		return (0);
-}
-if (*copy == NULL)
-{
-printf("dereference null");
-return (0);
-}
+	}
+	if (*copy == NULL)
+	{
+		printf("dereference null");
+		return (0);
+	}
 	while (copy[size])
 		size++;
 	for (i = 0; i < size ; i++)
