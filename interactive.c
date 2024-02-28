@@ -25,7 +25,7 @@ void interactive_mode(int argc, char **argv, char **envp)
 			free(command);
 			exit(EXIT_FAILURE);
 		}
-		strtok(command, 10);
+		strtok(command, '\n');
 		if (stat(command, &buf) == 0)
 			_print("file found");
 		else
