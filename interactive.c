@@ -28,9 +28,8 @@ void interactive_mode(int argc, char **argv, char **envp)
 			continue;
 		if (stat(command, &buf) == 0)
 			execute(command, argv, envp);
-		else
+		else if (catscom(command, argv, envp))
 		{
-			
 			_print(argv[0]);
 			_print(": ");
 			i++;
@@ -46,10 +45,10 @@ void interactive_mode(int argc, char **argv, char **envp)
  * @str: comamnd given to execute using execve
  * @argv: argument vactor array
  * @envp: environment variable
- * Return: no return as it'll use execve and fork
+ * Return: 0 on success
  * TRherefore it will overwrote the parent process
  */
-void execute(char *str, char **argv, char **envp)
+int execute(char *str, char **argv, char **envp)
 {
 	pid_t child;
 	int status;
@@ -60,10 +59,41 @@ void execute(char *str, char **argv, char **envp)
 	else
 	{
 		wait(&status);
-		return;
+		return (0);
 	}
+	return (0);
 }
 /**
  * catscom - concantenate comamnds to path and try to exxecute
- * 
-void 
+ * @com: command given to check
+ * @av: argument vector
+ * @env: environment varible to execute
+ * Return: NULL if it doesn't execuite
+ */
+char *catscom(char *com, char **av, char **env)
+{
+	struct stat buf;
+	char *str, *path, *toks;
+	int exec;
+
+	path = _getenv("PATH", env);
+	toks = strtok(path, ":");
+	str = str_concat(toks, com);
+	while (str)
+	{
+		toks = strtok(NULL, ":");
+		str = str_concat(toks, com);
+		if (stat(str, &buf) == 0)
+			exec = execute(str, av, env);
+		if (exec == 0)
+		{
+			free(path);
+			free(toks);
+			free(str);
+			return ("yes");
+		}
+		else
+			continue;
+	}
+	return (NULL);
+}

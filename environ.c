@@ -1,7 +1,7 @@
 #include "shell.h"
 /**
  * _getenv - get the environment variable
- * @name: command to look for
+ * @name: variable to look for
  * @envp: environemnt variable
  * Return: pointer to command string or NULL on failure
  */
