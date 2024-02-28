@@ -15,11 +15,14 @@ int _putchar(char c);
 int _fputchar(int fildes, char str);
 int _fprint(int fildes, char *str);
 int _print(char *str);
-size_t _strlen(char *str);
-char *_strcpy(char*src, char *dest);
+int _strlen(char *str);
+char *_strcpy(char *src, char *dest);
 char *_strdup(char *str);
 void interactive_mode(int argc, char **argv, char **envp);
 void non_interactive_mode(int argc, char **argv, char **envp);
 char *_getenv(char *cmd, char **envp);
+char **copyenviron(char **envp);
+int free_copyenviron(char **copy);
+int _strcmp(char *s1, char *s2);
 
 #endif /* SHELL_H */
