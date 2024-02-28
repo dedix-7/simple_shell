@@ -15,7 +15,7 @@ int _putchar(char c);
 int _fputchar(int fildes, char str);
 int _fprint(int fildes, char *str);
 int _print(char *str);
-int _strlen(char *str);
+size_t _strlen(char *str);
 char *_strcpy(char*src, char *dest);
 char *_strdup(char *str);
 void interactive_mode(int argc, char **argv, char **envp);

@@ -36,7 +36,7 @@ char **copyenviron(char **envp)
 	if (copy == NULL)
 		return (NULL);
 	for (i = 0; i < size; i++)
-		copy[i] = strdup(envp[i]);
+		copy[i] = _strdup(envp[i]);
 	return (copy);
 }
 /**
@@ -48,7 +48,6 @@ char **copyenviron(char **envp)
 int free_copyenviron(char **copy)
 {
 	int i = 0, size = 0;
-	char *str;
 
 	if (copy == NULL)
 		return (0);
@@ -59,6 +58,8 @@ int free_copyenviron(char **copy)
 	printf("Size is %d blocks", size);
 	for (i = 0; i < (size - 3) ; i++)
 	{
+		if (copy[i] == NULL)
+			continue;
 		printf("attempting to free %d block", i);
 		free(copy[i]);
 		printf("Successfully freed %d block", i);
@@ -77,6 +78,7 @@ int main(int argc, char **argv, char **envp)
 	int i;
 
 	copy = copyenviron(envp);
+	printf("block 57 is %s ", envp[57]);
 	for (i = 0; envp[i]; i++)
 		printf("%s\n%s\n", envp[i], copy[i]);
 	return (free_copyenviron(copy));
