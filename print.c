@@ -54,9 +54,14 @@ int _printd(int d)
 {
 	int rem, quotient;
 
+	if (d < 0)
+	{
+		_putchar('-');
+		d = -d;
+	}
 	rem = d % 10;
 	quotient = d / 10;
-	if (!quotient)
+	if (quotient > 0)
 		_printd(quotient);
-	return (_putchar(rem + 48));
+	return (_putchar(rem + '0'));
 }

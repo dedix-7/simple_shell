@@ -17,7 +17,7 @@ void interactive_mode(int argc, char **argv, char **envp)
 
 	while (1)
 	{
-		_print("$cisfun :");
+		_print("#cisfun : $");
 		check_getline = getline(&command, &bufsize, stdin);
 		if (check_getline == -1)
 		{
@@ -32,12 +32,13 @@ void interactive_mode(int argc, char **argv, char **envp)
 		else
 		{
 			_print(argv[0]);
-			_print(" : ");
+			_print(": ");
 			i++;
 			_printd(i);
-			_print(":");
+			_print(": ");
 			_print(command);
-			_print(" : not found");
+			_print(": not found");
+			_putchar(10);
 		}
 	}
 }
