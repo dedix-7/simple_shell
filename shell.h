@@ -9,6 +9,7 @@
 #include<string.h>
 #include<sys/types.h>
 #include<sys/wait.h>
+#include<sys/stat.h>
 #include<signal.h>
 
 int _putchar(char c);
@@ -24,5 +25,10 @@ char *_getenv(char *cmd, char **envp);
 char **copyenviron(char **envp);
 int free_copyenviron(char **copy);
 int _strcmp(char *s1, char *s2);
+int _printd(int d);
+void execute(char *str, char **av, char **ev);
+char firstlet(char *str);
+char *str_concat(char *s1, char *s2);
+char *_strncat(char *dest, char *src, int n);
 
 #endif /* SHELL_H */

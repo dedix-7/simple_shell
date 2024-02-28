@@ -75,3 +75,14 @@ int _strcmp(char *first, char *sec)
 	ret = ret + (first[i] - sec[i]);
 	return (ret);
 }
+/**
+ * firstlet - get the first letter of a string
+ * @str: string to get first letter of
+ * Return: first letter of string
+ */
+char firstlet(char *str)
+{
+	if (str == NULL)
+		return (0);
+	return (str[0]);
+}

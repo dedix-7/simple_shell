@@ -45,3 +45,23 @@ int _print(char *str)
 		i += _putchar(str[i]);
 	return (i);
 }
+/**
+ * _printd - print an int
+ * @d: integer to print
+ * Return: number of digits
+ */
+int _printd(int d)
+{
+	int rem, quotient;
+
+	if (d < 0)
+	{
+		_putchar('-');
+		d = -d;
+	}
+	rem = d % 10;
+	quotient = d / 10;
+	if (quotient > 0)
+		_printd(quotient);
+	return (_putchar(rem + '0'));
+}

@@ -16,7 +16,7 @@ char *_getenv(char *name, char **envp)
 	cpyenv = copyenviron(envp);
 	if (!cpyenv)
 		cpyenv = envp;
-	for (cpyenv != NULL; cpyenv[i]; i++)
+	while (cpyenv[i])
 	{
 		var = strtok(cpyenv[i], "=");
 		value = strtok(NULL, "");
@@ -28,6 +28,7 @@ char *_getenv(char *name, char **envp)
 			free_copyenviron(cpyenv);
 			return (ret);
 		}
+		i++;
 	}
 	free_copyenviron(cpyenv);
 	return (NULL);
@@ -48,11 +49,7 @@ char **copyenviron(char **envp)
 	if (copy == NULL)
 		return (NULL);
 	for (i = 0; i < size; i++)
-	{
-		copy[i] = strdup(envp[i]);
-		if (strcmp(envp[i], copy[i]) != 0)
-			exit(EXIT_FAILURE);
-	}
+		copy[i] = _strdup(envp[i]);
 	copy[size] = '\0';
 	return (copy);
 }
@@ -65,7 +62,6 @@ char **copyenviron(char **envp)
 int free_copyenviron(char **copy)
 {
 	int i = 0, size = 0;
-	char *str;
 
 	if (copy == NULL)
 		return (0);
