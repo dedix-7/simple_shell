@@ -31,5 +31,7 @@ char firstlet(char *str);
 char *str_concat(char *s1, char *s2);
 char *_strncat(char *dest, char *src, int n);
 char *catscom(char *com, char **av, char **ev);
+char *slasher(char *str);
+char *_strcat(char *src, char *dest);
 
 #endif /* SHELL_H */

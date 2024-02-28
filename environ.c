@@ -14,7 +14,7 @@ char *_getenv(char *name, char **envp)
 	if (name == NULL)
 		return (NULL);
 	cpyenv = copyenviron(envp);
-	if (!cpyenv)
+	if (cpyenv == NULL)
 		cpyenv = envp;
 	while (cpyenv[i])
 	{
@@ -25,8 +25,11 @@ char *_getenv(char *name, char **envp)
 			ret = _strdup(value);
 			if (!ret)
 				return (var);
-			free_copyenviron(cpyenv);
-			return (ret);
+			else
+			{
+				free_copyenviron(cpyenv);
+				return (ret);
+			}
 		}
 		i++;
 	}

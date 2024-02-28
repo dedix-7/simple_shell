@@ -77,8 +77,8 @@ char *catscom(char *com, char **av, char **env)
 	int exec;
 
 	path = _getenv("PATH", env);
+	comms = slasher(com);
 	toks = strtok(path, ":");
-	comms = str_concat("/", com);
 	str = str_concat(toks, comms);
 	while (toks)
 	{
@@ -97,4 +97,24 @@ char *catscom(char *com, char **av, char **env)
 			continue;
 	}
 	return (NULL);
+}
+/**
+ * slasher - add the slash to the beginning of a string
+ * @str: string to attach
+ * Return: good terminated string
+ */
+char *slasher(char *str)
+{
+	int i, size;
+	char *ret;
+
+	size = _strlen(str);
+	i = size + 2;
+	ret = malloc(sizeof(char) * i);
+	if (ret == NULL)
+		return (NULL);
+	ret[0] = '/';
+	ret[1] = 0;
+	ret = _strcat(ret, str);
+	return (ret);
 }
