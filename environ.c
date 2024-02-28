@@ -85,12 +85,3 @@ int free_copyenviron(char **copy)
  * @envp: envviornment varibale
  * Return: 0 on success
  */
-int main(int argc, char *argv[], char **envp)
-{
-	char *en, *tes;
-
-	en = _getenv("SHELL", envp);
-	tes = getenv("SHELL");
-/*	printf("\nThe functions yields value of PATH as \n%s\n and stdlib gives\n%s\n", en, tes);*/
-	return (0);
-}
