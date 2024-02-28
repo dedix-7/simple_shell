@@ -73,7 +73,7 @@ int execute(char *str, char **argv, char **envp)
 char *catscom(char *com, char **av, char **env)
 {
 	struct stat buf;
-	char *str, *path, *toks;
+	char *str, *path, *toks, *comms;
 	int exec;
 
 	path = _getenv("PATH", env);
@@ -82,6 +82,7 @@ char *catscom(char *com, char **av, char **env)
 	while (toks)
 	{
 		toks = strtok(NULL, ":");
+		comms = str_concat("
 		str = str_concat(toks, com);
 		if (stat(str, &buf) == 0)
 			exec = execute(str, av, env);
