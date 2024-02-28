@@ -78,12 +78,12 @@ char *catscom(char *com, char **av, char **env)
 
 	path = _getenv("PATH", env);
 	toks = strtok(path, ":");
-	str = str_concat(toks, com);
+	comms = str_concat("/", com);
+	str = str_concat(toks, comms);
 	while (toks)
 	{
 		toks = strtok(NULL, ":");
-		comms = str_concat("
-		str = str_concat(toks, com);
+		str = str_concat(toks, comms);
 		if (stat(str, &buf) == 0)
 			exec = execute(str, av, env);
 		if (exec == 0)
