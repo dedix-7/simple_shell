@@ -8,12 +8,11 @@
  */
 void interactive_mode(int argc, char **argv, char **envp)
 {
-	char *command = NULL;
+	char *command, comment = '#';
 	struct stat buf;
-	size_t bufsize;
+	size_t bufsize, i = 0;
 	ssize_t check_getline;
 	(void) argc;
-	(void) argv;
 	(void) envp;
 
 	while (1)
@@ -26,9 +25,40 @@ void interactive_mode(int argc, char **argv, char **envp)
 			exit(EXIT_FAILURE);
 		}
 		strtok(command, "\n");
+		if (firstlet(command) == comment)
+			continue;
 		if (stat(command, &buf) == 0)
-			_print("file found");
+			execute(command, argv);
 		else
-			_print("Not present");
+		{
+			_print(argv[0]);
+			_print(" : ");
+			i++;
+			_printd(i);
+			_print(":");
+			_print(command);
+			_print(" : not found");
+		}
+	}
+}
+/**
+ * execute - function to execute given commands
+ * @str: comamnd given to execute using execve
+ * @argv: argument vactor array
+ * Return: no return as it'll use execve and fork
+ * TRherefore it will overwrote the parent process
+ */
+void execute(char *str, char **argv)
+{
+	pid_t child;
+	int status;
+
+	child = fork();
+	if (child == 0)
+		execve(str, argv, NULL);
+	else
+	{
+		wait(&status);
+		return;
 	}
 }

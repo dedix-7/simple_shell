@@ -25,5 +25,8 @@ char *_getenv(char *cmd, char **envp);
 char **copyenviron(char **envp);
 int free_copyenviron(char **copy);
 int _strcmp(char *s1, char *s2);
+int _printd(int d);
+void execute(char *str, char **av);
+char firstlet(char *str);
 
 #endif /* SHELL_H */
