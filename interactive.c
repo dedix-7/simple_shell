@@ -8,14 +8,13 @@
  */
 void interactive_mode(int argc, char **argv, char **envp)
 {
-	char *command = NULL, *cmd;
+	char *command = NULL;
 	struct stat buf;
 	size_t bufsize;
 	ssize_t check_getline;
 	(void) argc;
 	(void) argv;
 	(void) envp;
-	pid_t child;
 
 	while (1)
 	{
@@ -27,6 +26,9 @@ void interactive_mode(int argc, char **argv, char **envp)
 			exit(EXIT_FAILURE);
 		}
 		strtok(command, 10);
-		
+		if (stat(command, &buf) == 0)
+			_print("file found");
+		else
+			_print("Not present");
 	}
 }
