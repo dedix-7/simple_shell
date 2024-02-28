@@ -28,7 +28,7 @@ void interactive_mode(int argc, char **argv, char **envp)
 			continue;
 		if (stat(command, &buf) == 0)
 			execute(command, argv, envp);
-		else if (catscom(command, argv, envp))
+		else if (catscom(command, argv, envp) == NULL)
 		{
 			_print(argv[0]);
 			_print(": ");
@@ -79,7 +79,7 @@ char *catscom(char *com, char **av, char **env)
 	path = _getenv("PATH", env);
 	toks = strtok(path, ":");
 	str = str_concat(toks, com);
-	while (str)
+	while (toks)
 	{
 		toks = strtok(NULL, ":");
 		str = str_concat(toks, com);
