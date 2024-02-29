@@ -1,34 +1,4 @@
 #include "shell.h"
-/**
- * _strlen - get the length of a string
- * @str: string to find length
- * Return: length of string
- */
-int _strlen(char *str)
-{
-	int len = 0;
-
-	while (str[len])
-		len++;
-	return (len);
-}
-/**
- * _strcpy - copy a string to a given address
- * @src: source to copy from
- * @dest: destination
- * Return: destiation address, or NULL on failure
- */
-char *_strcpy(char *dest, char *src)
-{
-	int i;
-
-	for (i = 0; src[i] != '\0'; i++)
-	{
-		dest[i] = src[i];
-	}
-	dest[i] = '\0';
-	return (dest);
-}
 
 /**
  * _strdup - duplicates a string into newly allocated array
@@ -37,52 +7,131 @@ char *_strcpy(char *dest, char *src)
  *
  * Return: pointer to new string
  */
+
 char *_strdup(char *str)
 {
-	int size = 0;
-	char *ptr, *ret;
+	int i, j, len = 0;
+	char *ptr;
 
-	if (!str)
-		return (NULL);
-
-	ptr = str;
-	while (*ptr++)
-		size++;
-
-	ret = malloc(size + 1);
-	if (!ret)
-		return (NULL);
-
-	ptr = ret;
-	while (*str)
-		*ptr++ = *str++;
-
-	*ptr = 0;
-	return (ret);
-}
-/**
- * _strcmp - clone strcmp
- * @first: first string to compare
- * @sec: second string
- * Return: difference in ascii values
- */
-int _strcmp(char *first, char *sec)
-{
-	int i = 0, ret = 0;
-
-	while ((*(first + i) == *(sec + i)) && first[i] && sec[i])
-		i++;
-	ret = ret + (first[i] - sec[i]);
-	return (ret);
-}
-/**
- * firstlet - get the first letter of a string
- * @str: string to get first letter of
- * Return: first letter of string
- */
-char firstlet(char *str)
-{
 	if (str == NULL)
+		return (NULL);
+
+	for (i = 0; str[i]; i++)
+		len++;
+
+	ptr = malloc(sizeof(char) * (len + 1));
+	if (ptr == NULL)
+		return (NULL);
+
+	for (j = 0; j < len; j++)
+		ptr[j] = str[j];
+	ptr[len] = '\0';
+
+	return (ptr);
+}
+
+/**
+ * strLen - returns the length of a string
+ * @input: string input
+ *
+ * Return: length of the string
+ */
+
+size_t strLen(const char *input)
+{
+	int idx = 0;
+	int n = 0;
+
+	for (idx = 0; input[idx] != '\0'; idx++)
+		n++;
+
+	return (n);
+}
+
+/**
+ * cmpStr - a function to check if two strings are the same
+ * @s01: input one
+ * @s02: input string two
+ *
+ * Return: 0 if the strings are the same || 1 if they are not
+ */
+
+int cmpStr(char *s01, char *s02)
+{
+	while (*s01 && (*s01 == *s02))
+	{
+		s01++;
+		s02++;
+	}
+	if (*s01 == *s02)
 		return (0);
-	return (str[0]);
+	else if (*s01 < *s02)
+		return (-1);
+	else
+		return (1);
+}
+
+/**
+ * splitInput - Splits an input string into array of strings
+ * @string: input string
+ *
+ * Return: array of Strings
+ */
+
+char **splitInput(char *string)
+{
+	char **customArray;
+	char *splitToken = NULL;
+	size_t count = 10; /* number or input strings*/
+	char *delim = " \n";
+	int idx = 0;
+
+	customArray = malloc(sizeof(char *) * count + 1);
+
+	if (customArray == NULL)
+	{
+		perror("Error creating customArray");
+		exit(EXIT_FAILURE); /* change to EXIT_FAILURE */
+	}
+	splitToken = strtok(string, delim);
+	while (splitToken != NULL)
+	{
+		customArray[idx] = _strdup(splitToken);
+		idx++;
+		splitToken = strtok(NULL, delim);
+	}
+	customArray[idx] = NULL; /* NULL terminate at the end */
+
+	return (customArray);
+}
+/**
+ * _getline - reads input from a stream
+ * @lineptr: a buffer array to read input into
+ * @n: size of input to read
+ * @fd: file descriptor
+ *
+ * Return: number of bytes Read
+ */
+ssize_t _getline(char **lineptr, size_t *n, int fd)
+{
+	/* int idx = 0; */
+	/* char buffer[1024]; */
+	ssize_t readBytes = 0;
+
+	readBytes = read(fd, (lineptr), sizeof(lineptr));
+	 /* ssize_t read(int fd, void *buf, size_t count); */
+
+	printf("readBytes is %ld\n", readBytes);
+	if (readBytes == -1)
+	{
+		perror("Error Reading from stream:");
+		/*free(buffer);*/
+		return (-1);
+	}
+	(lineptr)[readBytes] = '\0';
+	write(STDOUT_FILENO, (lineptr), readBytes);
+
+	*n = readBytes;
+
+	return (readBytes);
 }
