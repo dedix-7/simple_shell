@@ -43,7 +43,8 @@ char *_getenv(char *name, char **envp)
  */
 char **copyenviron(char **envp)
 {
-	char **copy;
+	char **copy = envp;
+
 	int i = 0, size = 0;
 
 	while (envp[size] != NULL)

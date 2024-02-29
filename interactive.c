@@ -59,9 +59,9 @@ int execute(char *str, char **argv, char **envp)
 	else
 	{
 		wait(&status);
-		return (0);
+		return (1);
 	}
-	return (0);
+	return (1);
 }
 /**
  * catscom - concantenate comamnds to path and try to exxecute
@@ -73,16 +73,15 @@ int execute(char *str, char **argv, char **envp)
 char *catscom(char *com, char **av, char **env)
 {
 	struct stat buf;
-	char *str, *path, *toks, *comms;
+	char *str, *path, *toks, *comms, *tre = "/";
 	int exec;
 
 	path = _getenv("PATH", env);
-	comms = slasher(com);
+	comms = str_concat(tre, com);
 	toks = strtok(path, ":");
 	str = str_concat(toks, comms);
 	while (toks)
 	{
-		toks = strtok(NULL, ":");
 		str = str_concat(toks, comms);
 		if (stat(str, &buf) == 0)
 			exec = execute(str, av, env);
@@ -94,7 +93,10 @@ char *catscom(char *com, char **av, char **env)
 			return ("yes");
 		}
 		else
+		{
+			toks = str_concat(toks, comms);
 			continue;
+		}
 	}
 	return (NULL);
 }
